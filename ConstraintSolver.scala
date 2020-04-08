@@ -59,21 +59,6 @@ abstract class Constraint[T](val variables: Seq[Variable[T]]) {
   Map[Variable[T], Seq[T]]
 }
 
-class Same[T](variables: Variable[T]*)
-  extends Constraint[T](variables) {
-
-  override def apply(values: Map[Variable[T], Seq[T]],
-                     variable: Variable[T],
-                     value: T):
-  Map[Variable[T], Seq[T]] =
-
-    values.transform{(v, vals) =>
-      if(variables.contains(v))
-        vals.filter{_ == value}
-      else vals
-    }
-}
-
 class Different[T](variables: Variable[T]*)
     extends Constraint[T](variables) {
 
